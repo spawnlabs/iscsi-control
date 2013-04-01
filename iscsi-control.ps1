@@ -446,7 +446,7 @@ Function Mounter
 		if($mount.driveLetter -and ($mount.driveLetter.ToUpper() -eq $mountDriveLetter.ToUpper()))
 		{
 			Write-Debug "unmounting $mount because we need to make a new mount with $mountIqn"
-			HandleUnmount -driveLetter $mountDriveLetter -iqn $mount.iqn
+			HandleUnmount -driveLetter $mountDriveLetter -iqn $mount.iqn -diskNumber $mount.diskNumber
 		}
 	}
 	
