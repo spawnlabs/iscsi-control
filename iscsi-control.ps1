@@ -1,4 +1,3 @@
-
 param(
 	[switch] $mount, 
 	$mountDriveLetter, # mount iscsi drive
@@ -29,6 +28,11 @@ Function ListInitiatorSessions
 	foreach ($iqn in $iqns)
 	{
 		$target = $iqn.TargetName
+		
+		if(!$target) 
+		{
+			continue;
+		}
 		
 		# this is probably awful.  Basically, iqns can be an array of strings, or an array of ManagementObjects retrieved from get-wmiobject. 
 		# this will get me into trouble eventually, I think
