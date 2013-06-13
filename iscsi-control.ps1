@@ -327,6 +327,21 @@ Function MountDisk
 	$cmd += "select disk $diskNumber"
 	$cmd += "online disk noerr"
 	$cmd += "select part 1"
+	RunDiskPart -cmds $cmd
+	
+	echo "rescan" | diskpart
+	echo "list volume" | diskpart
+	
+	$volumes = echo "list volume" | diskpart | grep Volume
+			
+	#$next_volume = ([int](($volumes[$volumes.length-1] | select-string "Volume (\d*).*Healthy (Offline)").Matches[0].Groups[1].ToString()))
+
+	$cmd = @()
+	$cmd += "select disk $diskNumber"
+	$cmd += "online disk noerr"
+	$cmd += "select part 1"
+	$cmd += "list volume"
+	#$cmd += "select volume $next_volume"
 	$cmd += "assign letter=$driveLetter"
 	$cmd += "list volume"
 	
